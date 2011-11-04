@@ -1,4 +1,4 @@
-(add-to-list 'load-path "~/.emacs.d")
+(add-to-list 'load-path "~/emacs_stuff/.emacs.d")
 (global-font-lock-mode 1)
 (show-paren-mode 1)
 
@@ -20,7 +20,7 @@
 (setq version-control t)
 
 ;;spaces instead of tabs
-(setq-default indent-tabs-mode nil)
+;;(setq-default indent-tabs-mode nil)
 
 ;;ditch the menu bar
 (menu-bar-mode 0)
@@ -34,8 +34,8 @@
 
 
 ;;change tabs to 4 characters in php and c
-;(autoload 'php-mode "~/.emacs.d/php-mode" nil t)
-;;(require 'php-mode)
+(autoload 'php-mode "~/.emacs.d/php-mode" nil t)
+(require 'php-mode)
 (defun my-php-mode-hook ()
  (setq tab-width 4))
 (add-hook 'php-mode-hook 'my-php-mode-hook)
@@ -43,8 +43,8 @@
 
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 
-(require 'psvn)
-(setq svn-status-verbose nil)
+;; (require 'psvn)
+;; (setq svn-status-verbose nil)
 
 ;; CSS mode
 (setq auto-mode-alist       
@@ -84,6 +84,7 @@
   ;; If there is more than one, they won't work right.
 ;; '(font-lock-string-face ((((type tty) (class color)) (:foreground "white")))))
 
+
 ;;'(grep-find-ignored-directories (quote (".svn")))
 
 
@@ -102,17 +103,17 @@
 ;;; interfacing with ELPA, the package archive.
 ;;; Move this code earlier if you want to reference
 ;;; packages in your .emacs.
-(when
-    (load
-     (expand-file-name "~/.emacs.d/elpa/package.el"))
-  (package-initialize))
+;; (when
+;;     (load
+;;      (expand-file-name "~/.emacs.d/elpa/package.el"))
+;;   (package-initialize))
 
 
-(require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
-(ac-config-default)
+;; (require 'auto-complete-config)
+;; (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
+;; (ac-config-default)
 
-(global-set-key "\C-x\C-b" 'ibuffer-other-window)
+;; (global-set-key "\C-x\C-b" 'ibuffer-other-window)
 
 
 (custom-set-faces
@@ -135,42 +136,42 @@
 ;; ;; php mode
 ;; (require 'php-mode)
 
-; highline
-(require 'highline)
-(highline-mode-on)
+;; ; highline
+;; (require 'highline)
+;; (highline-mode-on)
 
 
 ;;(require 'color-theme-gruber-darker)
 ;;(color-theme-gruber-darker)
 ;;(color-theme-hober)  
-;;(color-theme-jsc-dark)
+;; (color-theme-jsc-dark)
 
-(add-to-list 'load-path "~/.emacs.d/color-theme-6.6.0")
+(add-to-list 'load-path "~/emacs_stuff/.emacs.d/color-theme.el")
 (require 'color-theme)
-(eval-after-load "color-theme"
-  '(progn
-     (color-theme-initialize)
-     (color-theme-clarity)
-     )
-)
+;; (eval-after-load "color-theme"
+;;   '(progn
+;;      (color-theme-initialize)
+;;      (color-theme-clarity)
+;;      )
+;; )
 
 ; other buffer
 (global-set-key "\C-o" 'other-window)
 
 
-;; saveplace: save location in file when saving files
-(setq save-place-file "~/.emacs.d/cache/saveplace")
-(setq-default save-place t)            ;; activate it for all buffers
-(require 'saveplace)                   ;; get the package
+;; ;; saveplace: save location in file when saving files
+;; (setq save-place-file "~/.emacs.d/cache/saveplace")
+;; (setq-default save-place t)            ;; activate it for all buffers
+;; (require 'saveplace)                   ;; get the package
 
 
 
 ;; gtags
-(autoload 'gtags-mode "gtags" "" t)
-(setq php-mode-hook
-          '(lambda ()
-              (gtags-mode 1)
-      ))
+;;(autoload 'gtags-mode "gtags" "" t)
+;; (setq php-mode-hook
+;;           '(lambda ()
+;;               (gtags-mode 1)
+;;       ))
 
 (global-set-key "\C-c\ \C-c" 'comment-region)
 (global-set-key "\C-c\ \C-u" 'uncomment-region)
