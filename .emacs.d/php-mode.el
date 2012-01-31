@@ -365,7 +365,7 @@ See `php-beginning-of-defun'."
             (lambda ()
               (set (make-local-variable 'tab-width) 4)
               (set (make-local-variable 'c-basic-offset) 4)
-              (set (make-local-variable 'indent-tabs-mode) nil)
+              ;; (set (make-local-variable 'indent-tabs-mode) nil)
               (c-set-offset 'block-open' - )
               (c-set-offset 'block-close' 0 )) nil t)
 

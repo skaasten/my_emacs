@@ -41,7 +41,8 @@
 (add-hook 'php-mode-hook 'my-php-mode-hook)
 (setq-default c-basic-offset 4)
 
-(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+;;(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+;;(add-to-list 'auto-mode-alist '("\\.js$" . javascript-mode))
 
 ;; (require 'psvn)
 ;; (setq svn-status-verbose nil)
@@ -183,3 +184,21 @@
 ;; 
 (load-library "occur")
 
+;; ack
+(require 'ack)
+(setq ack-command "ack")
+
+
+(defun clean-php-mode ()
+(interactive)
+(php-mode)
+(setq c-basic-offset 4) ; 2 tabs indenting
+(setq indent-tabs-mode nil)
+(setq fill-column 78)
+(c-set-offset 'case-label '+)
+(c-set-offset 'arglist-close 'c-lineup-arglist-operators))
+(c-set-offset 'arglist-intro '+) ; for FAPI arrays and DBTNG
+(c-set-offset 'arglist-cont-nonempty 'c-lineup-math) ; for DBTNG fields and values
+
+(require 'saveplace)
+(setq-default save-place t)
