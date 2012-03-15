@@ -95,7 +95,7 @@
 (require 'recentf)
 (recentf-mode 1)
 (setq recentf-max-menu-items 25)
-;;(global-set-key "\C-x\ \C-r" 'recentf-open-files)
+(global-set-key "\C-x\ \C-r" 'recentf-open-files)
 (setq delete-old-versions 1)
 
 
@@ -194,7 +194,7 @@
 (interactive)
 (php-mode)
 (setq c-basic-offset 4) ; 2 tabs indenting
-(setq indent-tabs-mode nil)
+;;(setq indent-tabs-mode nil)
 (setq fill-column 78)
 (c-set-offset 'case-label '+)
 (c-set-offset 'arglist-close 'c-lineup-arglist-operators))
@@ -203,3 +203,15 @@
 
 (require 'saveplace)
 (setq-default save-place t)
+
+(add-hook 'php-mode-hook
+		  '(lambda ()
+				  (add-hook 'after-save-hook 
+							(lambda() 
+							  (set (make-local-variable 'compile-command) (format "phpcs --report=emacs --standard=/home/fresh/freshapp/test/CodeStandards %s" (buffer-file-name)))
+							  (compile compile-command)
+							) nil t
+				  )
+		   )
+)
+
