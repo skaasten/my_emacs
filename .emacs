@@ -32,7 +32,6 @@
 ;;tab width stuff
 (set-default 'tab-width 4)
 
-
 ;;change tabs to 4 characters in php and c
 (autoload 'php-mode "~/.emacs.d/php-mode" nil t)
 (require 'php-mode)
@@ -214,4 +213,17 @@
 				  )
 		   )
 )
+
+
+;; python mode use spaces for tabs
+(add-hook 'python-mode-hook
+		  '(lamda ()
+				  (setq-default indent-tabs-mode nil)
+			) nil t
+)
+
+(autoload 'geben "geben" "PHP Debugger on Emacs" t)
+
+
+(global-auto-revert-mode t)
 
