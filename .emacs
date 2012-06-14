@@ -227,3 +227,4 @@
 
 (global-auto-revert-mode t)
 
+(require 'magit)
