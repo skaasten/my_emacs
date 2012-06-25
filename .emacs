@@ -228,3 +228,6 @@
 (global-auto-revert-mode t)
 
 (require 'magit)
+
+(require 'highline)
+(global-highline-mode)
