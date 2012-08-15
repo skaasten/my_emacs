@@ -231,3 +231,8 @@
 
 (require 'highline)
 (global-highline-mode)
+
+(require 'uniquify) 
+(setq 
+  uniquify-buffer-name-style 'post-forward
+  uniquify-separator ":")
