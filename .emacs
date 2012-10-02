@@ -36,12 +36,15 @@
 (autoload 'php-mode "~/.emacs.d/php-mode" nil t)
 (require 'php-mode)
 (defun my-php-mode-hook ()
- (setq tab-width 4))
+ (setq tab-width 4)
+ (clean-php-mode)
+)
 (add-hook 'php-mode-hook 'my-php-mode-hook)
 (setq-default c-basic-offset 4)
 
-;;(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
-(add-to-list 'auto-mode-alist '("\\.js$" . javascript-mode))
+(require 'js2-mode)
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+;;(add-to-list 'auto-mode-alist '("\\.js$" . javascript-mode))
 (add-to-list 'auto-mode-alist '("\\.twig$" . html-mode))
 
 ;; (require 'psvn)
