@@ -194,8 +194,7 @@
 
 (defun clean-php-mode ()
 (interactive)
-(php-mode)
-(setq c-basic-offset 4) ; 2 tabs indenting
+(setq c-basic-offset 4) ; 4 tabs indenting
 ;;(setq indent-tabs-mode nil)
 (setq fill-column 78)
 (c-set-offset 'case-label '+)
@@ -239,3 +238,10 @@
 (setq 
   uniquify-buffer-name-style 'post-forward
   uniquify-separator ":")
+
+(autoload 'window-number-mode "window-number"
+   "A global minor mode that enables selection of windows according to
+ numbers with the C-x C-j prefix.  Another mode,
+ `window-number-meta-mode' enables the use of the M- prefix."
+   t)
+(window-number-mode)
