@@ -150,14 +150,16 @@
 ;;(color-theme-hober)  
 ;; (color-theme-jsc-dark)
 
-(add-to-list 'load-path "~/emacs_stuff/.emacs.d/color-theme.el")
-(require 'color-theme)
-;; (eval-after-load "color-theme"
+;; (add-to-list 'load-path "~/emacs_stuff/.emacs.d/color-theme.el")
+;; (require 'color-theme)
+;; (color-theme-hober)
+
 ;;   '(progn
 ;;      (color-theme-initialize)
 ;;      (color-theme-clarity)
 ;;      )
 ;; )
+
 
 ; other buffer
 (global-set-key "\C-o" 'other-window)
@@ -239,9 +241,4 @@
   uniquify-buffer-name-style 'post-forward
   uniquify-separator ":")
 
-(autoload 'window-number-mode "window-number"
-   "A global minor mode that enables selection of windows according to
- numbers with the C-x C-j prefix.  Another mode,
- `window-number-meta-mode' enables the use of the M- prefix."
-   t)
-(window-number-mode)
+
