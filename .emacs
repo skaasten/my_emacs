@@ -32,16 +32,6 @@
 ;;tab width stuff
 (set-default 'tab-width 4)
 
-;;change tabs to 4 characters in php and c
-(autoload 'php-mode "~/.emacs.d/php-mode" nil t)
-(require 'php-mode)
-(defun my-php-mode-hook ()
- (setq tab-width 4)
- (clean-php-mode)
-)
-(add-hook 'php-mode-hook 'my-php-mode-hook)
-(setq-default c-basic-offset 4)
-
 (require 'js2-mode)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 ;;(add-to-list 'auto-mode-alist '("\\.js$" . javascript-mode))
@@ -63,22 +53,24 @@
  (setq auto-mode-alist       
       (cons '("\\.tpl\\'" . html-mode) auto-mode-alist))
 
- (setq auto-mode-alist       
-      (cons '("\\.php\\'" . php-mode) auto-mode-alist))
- (setq auto-mode-alist       
-      (cons '("\\.inc\\'" . php-mode) auto-mode-alist))
- (setq auto-mode-alist       
-      (cons '("\\.module\\'" . php-mode) auto-mode-alist))
-
 
 (setq browse-url-browser-function 'browse-url-lynx-emacs)
 
 (custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(grep-find-command "find . -type f -not -path \"*.svn*\" -and -not -path \"*.sql*\" -and -not -path \"*.log\" -and -not -path \"*.serialized\" -print0 | xargs -0 -e grep -n -s -F ")
+ '(package-archives (quote (("gnu" . "http://elpa.gnu.org/packages/") ("melpa " . "http://melpa.milkbox.net/packages/"))))
+ '(php+-mode-php-compile-on-save t)
+ '(php+-mode-show-trailing-whitespace t)
+ '(php-hide-show-hide-doc-blocks t)
+ '(php-project-list (quote (("freshapp" "/home/fresh/freshapp" "/home/fresh/freshapp/TAGS" nil "/home/fresh/freshapp/test/phpunit.xml" nil (("" . "") "" "" "" "" "" "" "" "") "" ""))))
+ '(php-test-show-command t)
+ '(phpcs-shell-command "phpcs --report=emacs")
+ '(phpcs-standard "/home/fresh/freshapp/test/CodeStandards")
+ '(phpunit-shell-command "cd /home/fresh/freshapp/test; phpunit --debug")
  '(scroll-bar-mode (quote right))
  '(vc-make-backup-files t))
 ;;(custom-set-faces
@@ -101,18 +93,6 @@
 (setq delete-old-versions 1)
 
 
-
-;;; This was installed by package-install.el.
-;;; This provides support for the package system and
-;;; interfacing with ELPA, the package archive.
-;;; Move this code earlier if you want to reference
-;;; packages in your .emacs.
-;; (when
-;;     (load
-;;      (expand-file-name "~/.emacs.d/elpa/package.el"))
-;;   (package-initialize))
-
-
 ;; (require 'auto-complete-config)
 ;; (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
 ;; (ac-config-default)
@@ -121,10 +101,10 @@
 
 
 (custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :background "black" :foreground "#c0c0c0" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 98 :width normal :foundry "unknown" :family "DejaVu Sans Mono"))))
  '(highline-face ((t (:background "light grey" :foreground "black" :inverse-video nil)))))
 
@@ -136,9 +116,6 @@
                                         (setq truncate-lines t)
                                         )
           )
-
-;; ;; php mode
-;; (require 'php-mode)
 
 ;; ; highline
 ;; (require 'highline)
@@ -172,13 +149,6 @@
 
 
 
-;; gtags
-;;(autoload 'gtags-mode "gtags" "" t)
-;; (setq php-mode-hook
-;;           '(lambda ()
-;;               (gtags-mode 1)
-;;       ))
-
 (global-set-key "\C-c\ \C-c" 'comment-region)
 (global-set-key "\C-c\ \C-u" 'uncomment-region)
 
@@ -193,30 +163,6 @@
 (require 'ack)
 (setq ack-command "ack")
 
-
-(defun clean-php-mode ()
-(interactive)
-(setq c-basic-offset 4) ; 4 tabs indenting
-;;(setq indent-tabs-mode nil)
-(setq fill-column 78)
-(c-set-offset 'case-label '+)
-(c-set-offset 'arglist-close 'c-lineup-arglist-operators))
-(c-set-offset 'arglist-intro '+) ; for FAPI arrays and DBTNG
-(c-set-offset 'arglist-cont-nonempty 'c-lineup-math) ; for DBTNG fields and values
-
-(require 'saveplace)
-(setq-default save-place t)
-
-(add-hook 'php-mode-hook
-		  '(lambda ()
-				  (add-hook 'after-save-hook 
-							(lambda() 
-							  (set (make-local-variable 'compile-command) (format "phpcs --report=emacs --standard=/home/fresh/freshapp/test/CodeStandards %s" (buffer-file-name)))
-							  (compile compile-command)
-							) nil t
-				  )
-		   )
-)
 
 
 ;; python mode use spaces for tabs
@@ -241,4 +187,14 @@
   uniquify-buffer-name-style 'post-forward
   uniquify-separator ":")
 
+(autoload 'php+-mode "php+-mode" "PHP Plus Mode" t)
+(add-hook 'php+-mode-hook
+		  '(lambda () (setq indent-tabs-mode t)) nil t
+)
 
+;; (setq auto-mode-alist       
+;;       (cons '("\\.php\\'" . php+-mode) auto-mode-alist))
+
+(add-to-list 'load-path "/home/fresh/emacs_stuff/.emacs.d/phpplus-mode")
+(require 'php+-mode)
+(php+-mode-setup)
