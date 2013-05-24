@@ -32,7 +32,6 @@
 ;;tab width stuff
 (set-default 'tab-width 4)
 
-(require 'js2-mode)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 ;;(add-to-list 'auto-mode-alist '("\\.js$" . javascript-mode))
 (add-to-list 'auto-mode-alist '("\\.twig$" . html-mode))
@@ -152,17 +151,6 @@
 (global-set-key "\C-c\ \C-c" 'comment-region)
 (global-set-key "\C-c\ \C-u" 'uncomment-region)
 
-;; buffer move
-(require 'buffer-move)
-
-
-;; 
-(load-library "occur")
-
-;; ack
-(require 'ack)
-(setq ack-command "ack")
-
 
 
 ;; python mode use spaces for tabs
@@ -177,11 +165,6 @@
 
 (global-auto-revert-mode t)
 
-(require 'magit)
-
-(require 'highline)
-(global-highline-mode)
-
 (require 'uniquify) 
 (setq 
   uniquify-buffer-name-style 'post-forward
@@ -192,9 +175,6 @@
 		  '(lambda () (setq indent-tabs-mode t)) nil t
 )
 
-;; (setq auto-mode-alist       
-;;       (cons '("\\.php\\'" . php+-mode) auto-mode-alist))
+(setq auto-mode-alist       
+	  (cons '("\\.php\\'" . php+-mode) auto-mode-alist))
 
-(add-to-list 'load-path "/home/fresh/emacs_stuff/.emacs.d/phpplus-mode")
-(require 'php+-mode)
-(php+-mode-setup)
